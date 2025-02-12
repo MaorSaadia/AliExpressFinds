@@ -20,7 +20,7 @@ const Home: React.FC = async () => {
           <div className="relative text-center max-w-3xl mx-auto space-y-6">
             <div className="space-y-4 animate-fade-in">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-300 tracking-tight">
-                גלה מוצרים מובילים
+                גלו מוצרים מובילים
                 <span className="text-orange-500 dark:text-orange-300">
                   {" "}
                   במחירים ישירים
