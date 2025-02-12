@@ -93,12 +93,12 @@ const HeaderSearchBar = () => {
                   className="p-2"
                   aria-label="סגור חיפוש"
                 >
-                  <X className="h-5 w-5 text-gray-600" />
+                  <X className="h-5 w-5" />
                 </button>
 
                 <div className="flex-1">
                   <div className="relative flex items-center overflow-hidden rounded-full border border-gray-200 bg-gray-50 dark:bg-stone-800">
-                    <Search className="mr-3 h-4 w-4 text-gray-400" />
+                    <Search className="mr-3 h-4 w-4 text-gray-400 dark:text-gray-100" />
                     <input
                       type="text"
                       name="query"

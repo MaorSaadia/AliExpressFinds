@@ -16,7 +16,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col items-center space-y-2">
             <h1 className="text-lg text-gray-600 dark:text-gray-200">
-              תוצאות חיפוש עבור &quot;{query}&quot;
+              &quot;תוצאות חיפוש עבור &quot;{query}
             </h1>
             <div className="flex items-center gap-2">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-100">
@@ -25,7 +25,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
                 </span>
               </span>
               <span className="text-sm text-gray-500 dark:text-gray-100">
-                מוצרים נמצאו
+                מוצרים שנמצאו
               </span>
             </div>
           </div>
