@@ -6,35 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 const Hero = () => {
   return (
     <div className="overflow-hidden" dir="rtl">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-l from-orange-50 to-red-50 dark:from-orange-700 dark:to-red-700">
-        <div className="container mx-auto px-4 py-8 relative">
-          {/* Background decoration */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -left-1/4 -top-1/4 w-1/2 h-1/2 bg-orange-200 dark:bg-orange-400 rounded-full opacity-10 animate-pulse" />
-            <div className="absolute -right-1/4 -bottom-1/4 w-1/2 h-1/2 bg-red-200 dark:bg-red-400 rounded-full opacity-10 animate-pulse" />
-          </div>
-
-          <div className="relative text-center max-w-3xl mx-auto space-y-6">
-            <div className="space-y-4 animate-fade-in">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-300 tracking-tight">
-                גלה מוצרים מובילים
-                <span className="text-orange-500 dark:text-orange-300">
-                  {" "}
-                  במחירים ישירים
-                </span>
-              </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-200 md:text-2xl">
-                אנחנו מאתרים מוצרים ויראליים ועסקאות מדהימות, ומחברים אותך
-                ישירות למוכרים הטובים ביותר באליאקספרס
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Features Section */}
-      <section className="bg-white dark:bg-stone-800 py-10">
+      <section className="bg-white dark:bg-stone-800 py-4">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
