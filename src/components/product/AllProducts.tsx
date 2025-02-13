@@ -28,11 +28,11 @@ const AllProducts = ({ products }: ProductGridProps) => {
               <Package className="h-8 w-8 text-orange-500 animate-bounce" />
             </div>
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-              כל המוצרים
+              כל המציאות
             </h1>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              גלה את האוסף המוצרים המובחר שלנו. כל פריט נבחר בקפידה לאיכות
-              ושווי.
+              .גלה את אוסף המוצרים המובחר שלנו. כל פריט נבחר בקפידה בזכות איכותו
+              ושוויו
             </p>
           </div>
         </div>
