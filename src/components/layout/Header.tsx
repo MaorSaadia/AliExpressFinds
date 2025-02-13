@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 type HeaderProps = { categorySelector: React.ReactNode };
 
@@ -108,16 +109,19 @@ const Header = ({ categorySelector }: HeaderProps) => {
               </div>
 
               {/* Center section - Logo */}
-              <div className="flex-1 text-center">
+              <div className="flex-1 text-center mt-1">
                 <Link href="/" className="inline-block">
-                  <span className="text-2xl font-bold tracking-tight">
-                    <span className="text-orange-500">Ali</span>
-                    <span className="text-red-700">Express</span>
-                    <span className="text-orange-500">Finds</span>
-                  </span>
+                  <Image
+                    src="/logo.png"
+                    alt="מציאות לוגו"
+                    width={500} // Smaller size for better header fit
+                    height={500} // Keep it square since your logo is circular
+                    priority
+                    quality={100}
+                    className="h-14 w-14 md:h-16 md:w-16 hover:scale-110" // Responsive sizing
+                  />
                 </Link>
               </div>
-
               {/* Left section - Search and Theme (switched from right) */}
               <div className="flex items-center gap-2">
                 <HeaderSearchBar />
@@ -169,11 +173,15 @@ const Header = ({ categorySelector }: HeaderProps) => {
       >
         <div className="flex h-16 items-center justify-between px-4 border-b">
           <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-            <span className="text-xl font-bold tracking-tight">
-              <span className="text-orange-500">Ali</span>
-              <span className="text-red-700">Express</span>
-              <span className="text-orange-500">Finds</span>
-            </span>
+            <Image
+              src="/logo.png"
+              alt="מציאות לוגו"
+              width={500}
+              height={500}
+              priority
+              quality={100}
+              className="h-12 w-12" // Slightly smaller for mobile menu
+            />
           </Link>
           <button
             onClick={() => setIsMobileMenuOpen(false)}

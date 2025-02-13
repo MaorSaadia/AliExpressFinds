@@ -12,9 +12,9 @@ const Footer = () => {
           {/* Logo/Brand Name */}
           <Link href="/">
             <span className="text-xl font-bold tracking-tight sm:text-2xl">
-              <span className="text-orange-500">Ali</span>
-              <span className="text-red-700">Express</span>
-              <span className="text-orange-500">Finds</span>
+              <span className="text-orange-500">אלי</span>
+              <span className="text-red-700">אקספרס</span>
+              <span className="text-orange-500">מציאות</span>
             </span>
           </Link>
 
