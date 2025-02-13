@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react";
+
 import { getAllProducts } from "@/sanity/lib/client";
 import ProductGrid from "@/components/product/ProductGrid";
 import Hero from "@/components/layout/Hero";

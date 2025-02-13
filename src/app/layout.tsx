@@ -13,8 +13,8 @@ import "./globals.css";
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: { template: "%s | AliExpressFinds", absolute: "AliExpressFinds" },
-  description: "Discover Trending Products at Direct Prices",
+  title: { template: "%s | אליאקספרס מציאות", absolute: "אליאקספרס מציאות" },
+  description: "גלו מוצרים פופולריים במחירים ישירים",
 };
 
 const RootLayout = async ({
