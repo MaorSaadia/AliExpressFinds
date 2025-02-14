@@ -1,22 +1,68 @@
 "use client";
 
-import { useState } from "react";
-import { Package } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Package, Loader2, ArrowUp } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Product } from "@/sanity.types";
 
 import ProductGrid from "@/components/product/ProductGrid";
+import ProductGridSkeleton from "@/components/product/ProductSkeleton";
 
 const ITEMS_PER_PAGE = 12;
 
 type ProductGridProps = { products: Product[] };
 
 const AllProducts = ({ products }: ProductGridProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [displayCount, setDisplayCount] = useState(ITEMS_PER_PAGE);
+  const [isLoading, setIsLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentProducts = products.slice(startIndex, endIndex);
+  const currentProducts = products.slice(0, displayCount);
+  const hasMore = displayCount < products.length;
+
+  // Simulate initial loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setInitialLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle scroll to top button visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const loadMore = async () => {
+    setIsLoading(true);
+    // Simulate loading delay
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    setDisplayCount((prev) => Math.min(prev + ITEMS_PER_PAGE, products.length));
+    setIsLoading(false);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-stone-800">
@@ -41,48 +87,61 @@ const AllProducts = ({ products }: ProductGridProps) => {
       {/* Products Section */}
       <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <ProductGrid products={currentProducts} />
+          {initialLoading ? (
+            <ProductGridSkeleton />
+          ) : (
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <ProductGrid products={currentProducts} />
+            </motion.div>
+          )}
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="mt-8 flex justify-center gap-2">
+          {/* Load More Button */}
+          {!initialLoading && hasMore && (
+            <div className="mt-8 flex justify-center">
               <button
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                disabled={currentPage === totalPages}
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={loadMore}
+                disabled={isLoading}
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-white bg-orange-500 rounded-md hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
               >
-                הבא
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <span>טוען...</span>
+                  </>
+                ) : (
+                  <span>טען עוד מוצרים</span>
+                )}
               </button>
+            </div>
+          )}
 
-              <div className="flex gap-2">
-                {[...Array(totalPages)].map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                      currentPage === i + 1
-                        ? "bg-orange-500 text-white"
-                        : "text-gray-700 bg-white border border-gray-300 hover:bg-gray-50"
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                הקודם
-              </button>
+          {/* Products Counter */}
+          {!initialLoading && (
+            <div className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
+              מציג {currentProducts.length} מתוך {products.length} מוצרים
             </div>
           )}
         </div>
       </section>
+
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 left-8 p-3 bg-orange-500 text-white rounded-full shadow-lg hover:bg-orange-600 transition-colors duration-200"
+          >
+            <ArrowUp className="h-6 w-6" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
