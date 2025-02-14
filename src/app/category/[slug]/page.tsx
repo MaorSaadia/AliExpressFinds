@@ -4,12 +4,52 @@ import {
   getProductsByCategorySlug,
 } from "@/sanity/lib/client";
 import { LayoutGrid } from "lucide-react";
+import { Metadata } from "next";
 
 type CategoryPageProps = { params: Promise<{ slug: string }> };
+
+// Generate dynamic metadata
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  // Use the cached category data
+  const category = await getCategoryBySlug(slug);
+
+  return {
+    title: category?.title || slug.replace(/-/g, " "),
+    description:
+      category?.description ||
+      `גלה את המוצרים שלנו בקטגוריית ${slug.replace(/-/g, " ")}`,
+    openGraph: {
+      title: category?.title || slug.replace(/-/g, " "),
+      description:
+        category?.description ||
+        `גלה את המוצרים שלנו בקטגוריית ${slug.replace(/-/g, " ")}`,
+      type: "website",
+      // Add your default OG image here if needed
+      // images: [{url: category?.image || '/default-category-image.jpg'}],
+    },
+    keywords: [
+      category?.title || "",
+      "מוצרים",
+      "חנות",
+      "קטגוריה",
+      "קניות אונליין",
+      "חנות אונליין",
+    ].filter(Boolean),
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 const CategoryPage = async ({ params }: CategoryPageProps) => {
   const { slug } = await params;
 
+  // Use Promise.all with the cached data fetching
   const [category, products] = await Promise.all([
     getCategoryBySlug(slug),
     getProductsByCategorySlug(slug),
