@@ -57,10 +57,10 @@ const Home: React.FC = async () => {
               </span>
             </h2>
             <p
-              className="text-md text-orange-500 dark:text-orange-200 animate-pulse"
+              className="text-md text-orange-500 dark:text-orange-200 animate-pulse text-right"
               style={{ animationDelay: "200ms" }}
             >
-              מתעדכן יומית עם המציאות הכי חמות!
+              מתעדכן יומית עם המציאות הכי חמות
             </p>
           </div>
           <ProductGrid products={recentProducts} />

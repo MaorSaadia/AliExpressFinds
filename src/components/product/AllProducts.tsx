@@ -77,7 +77,7 @@ const AllProducts = ({ products }: ProductGridProps) => {
               כל המציאות
             </h1>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              .גלה את אוסף המוצרים המובחר שלנו. כל פריט נבחר בקפידה בזכות איכותו
+              .גלה את אוסף המוצרים המובחר שלנו כל פריט נבחר בקפידה בזכות איכותו
               ושוויו
             </p>
           </div>
