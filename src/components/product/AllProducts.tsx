@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Product } from "@/sanity.types";
 
 import ProductGrid from "@/components/product/ProductGrid";
-import ProductGridSkeleton from "@/components/product/ProductSkeleton";
+import { ProductGridSkeleton } from "./ProductSkeleton";
 
 const ITEMS_PER_PAGE = 12;
 

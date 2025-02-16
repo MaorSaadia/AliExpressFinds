@@ -2,7 +2,7 @@ import { getAllProducts } from "@/sanity/lib/client";
 import AllProducts from "@/components/product/AllProducts";
 
 export const metadata = {
-  title: "כל המציאות | אלי אקספרס מציאות",
+  title: "כל המציאות",
   description: "עיין בקולקציה המלאה שלנו מוצרים ורנדיים מאליאקספרס",
 };
 
