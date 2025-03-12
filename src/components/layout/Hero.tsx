@@ -35,7 +35,7 @@ const Hero = () => {
                 className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                <CardContent className="p-8 text-center space-y-4 dark:bg-gray-900/10 shadow-md rounded-lg">
+                <CardContent className="p-4 text-center space-y-4 dark:bg-gray-900/10 rounded-lg">
                   <div className="flex justify-center">
                     <feature.icon className="h-12 w-12 text-orange-500 group-hover:scale-110 transition-transform duration-200" />
                   </div>
