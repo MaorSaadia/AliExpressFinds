@@ -69,7 +69,6 @@ const SubcategoryPage = async ({ params }: PageProps) => {
   return (
     <div className="min-h-screen dark:bg-stone-800">
       <div className="container mx-auto px-3 p-3">
-        {/* פירורי לחם */}
         <Breadcrumbs
           items={[
             { label: category.title || "", href: `/category/${slug}` },
@@ -77,7 +76,6 @@ const SubcategoryPage = async ({ params }: PageProps) => {
           ]}
         />
       </div>
-      {/* כותרת תת-קטגוריה */}
       <div className="bg-gradient-to-l from-orange-50 to-red-50 dark:from-orange-800 dark:to-red-900">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col items-center space-y-2">
