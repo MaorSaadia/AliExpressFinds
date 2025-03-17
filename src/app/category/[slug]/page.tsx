@@ -1,10 +1,12 @@
+import { Metadata } from "next";
 import ProductGrid from "@/components/product/ProductGrid";
 import {
   getCategoryBySlug,
   getProductsByCategorySlug,
 } from "@/sanity/lib/client";
 import { LayoutGrid } from "lucide-react";
-import { Metadata } from "next";
+
+import { Breadcrumbs } from "@/components/ui/breadcrumb";
 
 type CategoryPageProps = { params: Promise<{ slug: string }> };
 
@@ -39,9 +41,24 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
   ]);
 
   return (
-    <div className="min-h-screen dark:bg-stone-800">
+    <div className="min-h-screen dark:bg-stone-800" dir="rtl">
+      {/* Add Breadcrumbs */}
+      <div className="container mx-auto px-3 p-3">
+        <div className="flex justify-end">
+          <Breadcrumbs
+            items={[
+              {
+                label: category?.title || slug.replace(/-/g, " "),
+                href: "#",
+                current: true,
+              },
+            ]}
+            className="mr-0 ml-auto"
+          />
+        </div>
+      </div>
       {/* Category Header */}
-      <div className="bg-gradient-to-l from-orange-50 to-red-50 dark:from-orange-800 dark:to-red-900">
+      <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-800 dark:to-red-900">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col items-center space-y-2">
             <h1 className="text-lg text-gray-600 dark:text-gray-200 capitalize">

@@ -68,7 +68,7 @@ const SubcategoryPage = async ({ params }: PageProps) => {
 
   return (
     <div className="min-h-screen dark:bg-stone-800">
-      <div className="container mx-auto px-3 p-3">
+      <div className="container mx-auto px-3 p-3 flex justify-end">
         <Breadcrumbs
           items={[
             { label: category.title || "", href: `/category/${slug}` },
