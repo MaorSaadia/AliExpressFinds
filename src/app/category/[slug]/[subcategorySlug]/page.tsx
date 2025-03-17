@@ -16,7 +16,6 @@ type PageProps = {
   }>;
 };
 
-// Generate dynamic metadata
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -31,46 +30,28 @@ export async function generateMetadata({
   const subcategoryName =
     subcategory?.title || subcategorySlug.replace(/-/g, " ");
 
-  // Format names for better display
   const formattedCategoryName =
     categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
   const formattedSubcategoryName =
     subcategoryName.charAt(0).toUpperCase() + subcategoryName.slice(1);
 
   const title = `${formattedSubcategoryName}`;
-  const description = `Shop trending ${formattedSubcategoryName} ${formattedCategoryName} from top AliExpress sellers.`;
+  const description = `קנה ${formattedSubcategoryName} ${formattedCategoryName} מובילים ממוכרי AliExpress המובילים.`;
 
   return {
     title,
     description,
     openGraph: {
-      title: `${formattedSubcategoryName} ${formattedCategoryName} - AliExpress Deals`,
+      title: `${formattedSubcategoryName} ${formattedCategoryName} - מבצעי AliExpress`,
       description,
       type: "website",
-    },
-    keywords: [
-      formattedCategoryName,
-      formattedSubcategoryName,
-      `${formattedSubcategoryName} ${formattedCategoryName}`,
-      `${formattedSubcategoryName} AliExpress`,
-      "AliExpress deals",
-      "trending products",
-    ].filter(Boolean),
-    robots: {
-      index: true,
-      follow: true,
-    },
-    alternates: {
-      canonical: `https://alitrendsfinds.com/category/${slug}/${subcategorySlug}`,
     },
   };
 }
 
 const SubcategoryPage = async ({ params }: PageProps) => {
-  // Await the params before destructuring
   const { slug, subcategorySlug } = await params;
 
-  // Use Promise.all to fetch all required data concurrently
   const [category, subcategory, products] = await Promise.all([
     getCategoryBySlug(slug),
     getSubcategoryBySlug(slug, subcategorySlug),
@@ -80,7 +61,7 @@ const SubcategoryPage = async ({ params }: PageProps) => {
   if (!category || !subcategory) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500">Category or subcategory not found.</p>
+        <p className="text-gray-500">קטגוריה או תת-קטגוריה לא נמצאו.</p>
       </div>
     );
   }
@@ -88,7 +69,7 @@ const SubcategoryPage = async ({ params }: PageProps) => {
   return (
     <div className="min-h-screen dark:bg-stone-800">
       <div className="container mx-auto px-3 p-3">
-        {/* Breadcrumbs */}
+        {/* פירורי לחם */}
         <Breadcrumbs
           items={[
             { label: category.title || "", href: `/category/${slug}` },
@@ -96,7 +77,7 @@ const SubcategoryPage = async ({ params }: PageProps) => {
           ]}
         />
       </div>
-      {/* Subcategory Header */}
+      {/* כותרת תת-קטגוריה */}
       <div className="bg-gradient-to-l from-orange-50 to-red-50 dark:from-orange-800 dark:to-red-900">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col items-center space-y-2">
@@ -112,14 +93,14 @@ const SubcategoryPage = async ({ params }: PageProps) => {
                 </span>
               </span>
               <span className="text-sm text-gray-500 dark:text-gray-100">
-                Products Found
+                מוצרים נמצאו
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Products Section */}
+      {/* אזור מוצרים */}
       <section className="container mx-auto px-4 py-6">
         {products.length > 0 ? (
           <ProductGrid products={products} />
@@ -128,7 +109,7 @@ const SubcategoryPage = async ({ params }: PageProps) => {
             <div className="flex flex-col items-center space-y-2">
               <LayoutGrid className="h-6 w-6 text-orange-500" />
               <p className="text-gray-500">
-                No products available in this subcategory yet.
+                אין מוצרים זמינים בתת-קטגוריה זו עדיין.
               </p>
             </div>
           </div>

@@ -13,35 +13,18 @@ export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-
-  // Use the cached category data
   const category = await getCategoryBySlug(slug);
+  const categoryName = category?.title || slug.replace(/-/g, " ");
+  const formattedCategoryName =
+    categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
 
   return {
-    title: category?.title || slug.replace(/-/g, " "),
-    description:
-      category?.description ||
-      `גלה את המוצרים שלנו בקטגוריית ${slug.replace(/-/g, " ")}`,
+    title: `${formattedCategoryName}`,
+    description: `גלה מוצרים פופולריים בקטגוריה ${formattedCategoryName} מעלי אקספרס במחירים הטובים ביותר.`,
     openGraph: {
-      title: category?.title || slug.replace(/-/g, " "),
-      description:
-        category?.description ||
-        `גלה את המוצרים שלנו בקטגוריית ${slug.replace(/-/g, " ")}`,
+      title: `${formattedCategoryName} - מוצרים פופולריים מעלי אקספרס`,
+      description: `קנה את המוצרים הטובים ביותר בקטגוריה ${formattedCategoryName} מעלי אקספרס.`,
       type: "website",
-      // Add your default OG image here if needed
-      // images: [{url: category?.image || '/default-category-image.jpg'}],
-    },
-    keywords: [
-      category?.title || "",
-      "מוצרים",
-      "חנות",
-      "קטגוריה",
-      "קניות אונליין",
-      "חנות אונליין",
-    ].filter(Boolean),
-    robots: {
-      index: true,
-      follow: true,
     },
   };
 }
@@ -74,11 +57,6 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
                 מוצרים נמצאו
               </span>
             </div>
-            {category?.description && (
-              <p className="text-sm text-gray-500 max-w-2xl text-center">
-                {category.description}
-              </p>
-            )}
           </div>
         </div>
       </div>
